@@ -62,6 +62,7 @@
                 <attribute name="Main-Class" value="net.i2p.apps.systray.SysTray" />
                 <attribute name="Implementation-Version" value="${full.version}" />
                 <attribute name="Built-By" value="${build.built-by}" />
+                <attribute name="Build-Date" value="${build.timestamp}" />
                 <attribute name="Base-Revision" value="${workspace.version}" />
                 <attribute name="Workspace-Changes" value="${workspace.changes.tr}" />
                 <attribute name="X-Compile-Source-JDK" value="${javac.version}" />
