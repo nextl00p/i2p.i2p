@@ -1418,7 +1418,7 @@
     <target name="updater200WithJettyFixesAndJbigi" depends="prepjupdatefixes, prepjbigiupdate, preplicenses, pack200, zipit200" />
     <target name="updater200WithJbigi" depends="prepupdate, prepjbigiupdate, preplicenses, pack200, zipit200" />
     <target name="updater" depends="prepupdate, preplicenses, zipit" />
-    <target name="updaterReproducible" depends="prepupdateReproducible, preplicenses, zipit" />
+    <target name="updaterReproducible" depends="prepupdateReproducible, preplicenses, zipit, postZipitReproducible" />
     <target name="updaterRepack" depends="prepupdate, preplicenses, repack200, zipit" />
     <target name="updaterWithJavadoc" depends="prepupdate, preplicenses, copyJavadoc, zipit" />
     <target name="updater200WithJavadoc" depends="prepupdate, preplicenses, copyJavadoc, pack200, zipit200" />
@@ -1457,6 +1457,14 @@
         <tar destfile="i2pupdate.tgz" basedir="pkg-temp" compression="gzip" />
         <tar destfile="i2pupdate.tbz" basedir="pkg-temp" compression="bzip2" />
        -->
+    </target>
+    
+    <target name="postZipitReproducible" depends="zipit">
+    	<echo message="Executing strip-nondeterminism on update zip" />
+		<apply executable="strip-nondeterminism" failonerror="true">
+			<arg line="-T ${build.unixtime}" />
+			<fileset file="i2pupdate.zip" />
+		</apply>
     </target>
 
     <target name="zipit200" depends="getReleaseNumber" >
