@@ -1046,6 +1046,8 @@
     </target>
 
     <target name="pkg" depends="distclean, updater, preppkg, installer" />
+    
+    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, installer" />
 
     <target name="pkg200" depends="distclean, updater200, preppkg, installer" />
 
@@ -1416,6 +1418,7 @@
     <target name="updater200WithJettyFixesAndJbigi" depends="prepjupdatefixes, prepjbigiupdate, preplicenses, pack200, zipit200" />
     <target name="updater200WithJbigi" depends="prepupdate, prepjbigiupdate, preplicenses, pack200, zipit200" />
     <target name="updater" depends="prepupdate, preplicenses, zipit" />
+    <target name="updaterReproducible" depends="prepupdateReproducible, preplicenses, zipit" />
     <target name="updaterRepack" depends="prepupdate, preplicenses, repack200, zipit" />
     <target name="updaterWithJavadoc" depends="prepupdate, preplicenses, copyJavadoc, zipit" />
     <target name="updater200WithJavadoc" depends="prepupdate, preplicenses, copyJavadoc, pack200, zipit200" />
@@ -1508,7 +1511,16 @@
                 <arg value="for %i in (pkg-temp\lib\*.jar) do pack200 -r %i" />
         </exec>
     </target>
-
+	
+	<target name="prepupdateReproducible" depends="build2, prepStripNondeterminism, prepupdateSmall, prepConsoleDocUpdates, prepCertificates, prep-script-translation, truncatehistory, prepupdate" />
+	
+	<target name="prepStripNondeterminism" depends="build2">
+		<echo message="Executing strip-nondeterminism in all subprojects" />
+		<apply executable="strip-nondeterminism" failonerror="true">
+			<fileset dir="build/" />
+		</apply>
+	</target>
+	
     <target name="prepupdate" depends="build2, prepupdateSmall, prepConsoleDocUpdates, prepCertificates, prep-script-translation, truncatehistory">
         <copy file="build/BOB.jar" todir="pkg-temp/lib/" />
         <copy file="build/sam.jar" todir="pkg-temp/lib/" />
