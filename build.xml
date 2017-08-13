@@ -1047,7 +1047,7 @@
 
     <target name="pkg" depends="distclean, updater, preppkg, installer" />
     
-    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, installer" />
+    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, preInstallerReproducible, installer" />
 
     <target name="pkg200" depends="distclean, updater200, preppkg, installer" />
 
@@ -1662,7 +1662,12 @@
     <target name="buildUtilityJar" depends="buildCore">
         <ant dir="installer/java" target="build" />
     </target>
-
+    
+	<target name="preInstallerReproducible">
+		<apply executable="find">
+			<arg value="pkg-temp/ -exec touch -t ${build.shelltimestamp} {} \;" />
+		</apply>
+	</target>
     <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar" >
         <!--
           Force 1.5 pack200 output
