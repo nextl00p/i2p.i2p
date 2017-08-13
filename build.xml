@@ -1517,6 +1517,7 @@
 	<target name="prepStripNondeterminism" depends="build2">
 		<echo message="Executing strip-nondeterminism in all subprojects" />
 		<apply executable="strip-nondeterminism" failonerror="true">
+			<arg line="-T ${build.unixtime}" />
 			<fileset dir="build/" />
 		</apply>
 	</target>
