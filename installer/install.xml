@@ -35,6 +35,7 @@
 		The command needs to be run as a Process rather than as an executable tag in
 		order to pass $INSTALL_PATH as a parameter.
          -->
+         <pack-compression-format>gz</pack-compression-format>
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
     </info>
 
