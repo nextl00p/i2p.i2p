@@ -1666,7 +1666,8 @@
 	<target name="preInstallerReproducible">
 		<apply executable="touch" failonerror="true">
 			<fileset dir="pkg-temp/" />
-			<arg value="-t ${build.shelltimestamp}" />
+			<arg value="-t" />
+			<arg value="${build.shelltimestamp}" />
 			<srcfile />
 		</apply>
 	</target>
