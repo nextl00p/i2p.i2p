@@ -1680,6 +1680,10 @@
 			<arg line="-T ${build.unixtime}" />
 			<fileset file="build/utility.jar" />
 		</apply>
+		<apply executable="strip-nondeterminism" failonerror="true">
+			<arg line="-T ${build.unixtime}" />
+			<fileset file="build/jbigi.jar" />
+		</apply>
 	</target>
 	
     <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar, preInstallerReproducible" >
