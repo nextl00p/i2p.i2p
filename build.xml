@@ -1664,14 +1664,7 @@
     </target>
     
 	<target name="preInstallerReproducible">
-		<!-- touch everything in pkg-temp/ -->
-		<apply executable="touch" type="both" failonerror="true">
-			<fileset dir="pkg-temp/" />
-			<arg value="-t" />
-			<arg value="${build.shelltimestamp}" />
-			<srcfile />
-		</apply>
-		<!-- strip-nondeterminism for utility -->
+		<!-- strip-nondeterminism for some more jars -->
 		<apply executable="strip-nondeterminism" failonerror="true">
 			<arg line="-T ${build.unixtime}" />
 			<fileset file="build/tools.jar" />
@@ -1687,6 +1680,13 @@
 		<apply executable="strip-nondeterminism" failonerror="true">
 			<arg line="-T ${build.unixtime}" />
 			<fileset file="pkg-temp/lib/jbigi.jar" />
+		</apply>
+		<!-- touch everything in pkg-temp/ -->
+		<apply executable="touch" type="both" failonerror="true">
+			<fileset dir="pkg-temp/" />
+			<arg value="-t" />
+			<arg value="${build.shelltimestamp}" />
+			<srcfile />
 		</apply>
 	</target>
 	
