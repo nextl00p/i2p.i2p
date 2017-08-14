@@ -1047,7 +1047,7 @@
 
     <target name="pkg" depends="distclean, updater, preppkg, installer" />
     
-    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, preInstallerReproducible, installer" />
+    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, installer" />
 
     <target name="pkg200" depends="distclean, updater200, preppkg, installer" />
 
@@ -1664,14 +1664,22 @@
     </target>
     
 	<target name="preInstallerReproducible">
+		<!-- touch everything in pkg-temp/ -->
 		<apply executable="touch" type="both" failonerror="true">
 			<fileset dir="pkg-temp/" />
 			<arg value="-t" />
 			<arg value="${build.shelltimestamp}" />
 			<srcfile />
 		</apply>
+		<!-- strip-nondeterminism for utility -->
+		<apply executable="strip-nondeterminism" failonerror="true">
+			<arg line="-T ${build.unixtime}" />
+			<fileset file="build/utility.jar" />
+			<fileset file="build/tools.jar" />
+		</apply>
 	</target>
-    <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar" >
+	
+    <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar, preInstallerReproducible" >
         <!--
           Force 1.5 pack200 output
           Doesnt work!
