@@ -1664,8 +1664,10 @@
     </target>
     
 	<target name="preInstallerReproducible">
-		<apply executable="find">
-			<arg value="pkg-temp/ -exec touch -t ${build.shelltimestamp} {} \;" />
+		<apply executable="touch" failonerror="true">
+			<fileset dir="pkg-temp/" />
+			<arg value="-t ${build.shelltimestamp}" />
+			<srcfile />
 		</apply>
 	</target>
     <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar" >
