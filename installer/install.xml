@@ -35,7 +35,6 @@
 		The command needs to be run as a Process rather than as an executable tag in
 		order to pass $INSTALL_PATH as a parameter.
          -->
-         <pack-compression-format>gz</pack-compression-format>
         <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
     </info>
 
@@ -123,7 +122,9 @@
     <packs>
         <pack name="Base" required="yes">
             <description>Base installation files</description>
-            <fileset dir="pkg-temp" includes="**/*" targetdir="$INSTALL_PATH"/>
+            <fileset dir="pkg-temp" includes="**/*" targetdir="$INSTALL_PATH">
+				<pack200 keep-file-order="true" segment-limit="-1" />
+            </fileset>
             <!--
               Do variable substitution in these files. See:
               http://www.javalobby.org/forums/thread.jspa?threadID=15967&tstart=0
