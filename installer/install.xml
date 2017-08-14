@@ -123,7 +123,7 @@
         <pack name="Base" required="yes">
             <description>Base installation files</description>
             <fileset dir="pkg-temp" includes="**/*" targetdir="$INSTALL_PATH">
-				<pack200 keep-file-order="true" segment-limit="-1" effort="0" modification-time="keep" />
+				<pack200 keep-file-order="true" segment-limit="-1" />
             </fileset>
             <!--
               Do variable substitution in these files. See:
