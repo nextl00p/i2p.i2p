@@ -1674,8 +1674,11 @@
 		<!-- strip-nondeterminism for utility -->
 		<apply executable="strip-nondeterminism" failonerror="true">
 			<arg line="-T ${build.unixtime}" />
-			<fileset file="build/utility.jar" />
 			<fileset file="build/tools.jar" />
+		</apply>
+		<apply executable="strip-nondeterminism" failonerror="true">
+			<arg line="-T ${build.unixtime}" />
+			<fileset file="build/utility.jar" />
 		</apply>
 	</target>
 	
