@@ -1047,7 +1047,7 @@
 
     <target name="pkg" depends="distclean, updater, preppkg, installer" />
     
-    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, installer" />
+    <target name="pkgReproducible" depends="distclean, updaterReproducible, preppkg, installerReproducible" />
 
     <target name="pkg200" depends="distclean, updater200, preppkg, installer" />
 
@@ -1690,7 +1690,9 @@
 		</apply>
 	</target>
 	
-    <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar, preInstallerReproducible" >
+	<target name="installerReproducible" depends="preInstallerReproducible, installer" />
+	
+    <target name="installer" depends="preppkg, buildProperties, util-list-changes, izpack-patches, buildUtilityJar" >
         <!--
           Force 1.5 pack200 output
           Doesnt work!
